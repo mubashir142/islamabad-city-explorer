@@ -1,16 +1,66 @@
-# React + Vite
+# Islamabad City Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive city map for exploring Islamabad. The map uses Leaflet and
+OpenStreetMap tiles. Place data is community-maintained and is not official city
+data.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```sh
+npm install
+npm run dev
+```
 
-## React Compiler
+Open the local URL printed by Vite. To create a production build, run
+`npm run build`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## OpenStreetMap places dataset
 
-## Expanding the ESLint configuration
+The bundled GeoJSON snapshot is [`public/data/islamabad-services.geojson`](public/data/islamabad-services.geojson).
+It contains 967 point features from these OpenStreetMap tags:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Category | OSM tags | Features |
+| --- | --- | ---: |
+| Hospitals | `amenity=hospital` | 152 |
+| Universities | `amenity=university` | 60 |
+| Parks | `leisure=park` | 576 |
+| Public offices | `office=government` or `amenity=townhall` | 179 |
+
+### Source and extraction
+
+- **Source:** OpenStreetMap contributors, queried through the
+  [Overpass API](https://overpass.kumi.systems/).
+- **Extraction date:** 2026-10-22.
+- **OSM snapshot timestamp reported by Overpass:** 2026-07-28 02:16:18 UTC.
+- **Search bounds:** latitude 33.5–33.9, longitude 72.8–73.3. The Overpass
+  query requests nodes, ways, and relations matching the tags listed above
+  within this bounding box.
+- **Attribution:** © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright).
+  OpenStreetMap data is available under the
+  [Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/).
+  Follow the ODbL attribution and share-alike requirements when reusing or
+  distributing the dataset.
+
+The GeoJSON uses each OSM node's coordinates. Ways and relations are
+represented by Overpass's approximate center point, not by their full geometry
+or boundaries. The features retain their OSM type, ID, source tags, and a link
+to the source OSM element. An English name is used when the primary name is
+unavailable; entries without a usable name remain in the data without one.
+
+### Coverage and limitations
+
+- This is a rectangular search area, not an Islamabad Capital Territory
+  boundary. It includes nearby areas outside Islamabad, including parts of
+  Rawalpindi.
+- The snapshot contains only features using the exact tags listed above. Places
+  tagged differently, unmapped places, and changes after the OSM snapshot may
+  be missing.
+- OSM is community-maintained. The dataset may be incomplete, outdated, or
+  incorrectly tagged; it is not an official directory and should not be used
+  as an authoritative source.
+- Some source text values that could not be decoded cleanly are omitted rather
+  than included as corrupted text. As a result, some features have no display
+  name.
+- This is a static snapshot; it does not update automatically. The application
+  currently introduces these categories; displaying the GeoJSON places on the
+  map is a subsequent checkpoint.
