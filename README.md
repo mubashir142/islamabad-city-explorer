@@ -4,6 +4,8 @@ A responsive city map for exploring Islamabad. The map uses Leaflet and
 OpenStreetMap tiles. Place data is community-maintained and is not official city
 data.
 
+**Live site:** <https://mubashir142.github.io/islamabad-city-explorer/>
+
 ## Run locally
 
 ```sh
