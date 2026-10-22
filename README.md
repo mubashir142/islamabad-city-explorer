@@ -14,6 +14,24 @@ npm run dev
 Open the local URL printed by Vite. To create a production build, run
 `npm run build`.
 
+## Validate changes
+
+```sh
+npm run lint
+npx tsc --noEmit
+npm run build
+```
+
+## Explore the map
+
+- Search places by name or street, then select a result to focus the map and
+  view its details.
+- Use category filters to narrow the results list.
+- Toggle map layers independently to show or hide each category.
+- Select any map marker to open its OpenStreetMap record.
+- Switch between day and night mode; the choice is saved in this browser and
+  follows the system theme on first visit.
+
 ## OpenStreetMap places dataset
 
 The bundled GeoJSON snapshot is [`public/data/islamabad-services.geojson`](public/data/islamabad-services.geojson).
@@ -62,5 +80,4 @@ unavailable; entries without a usable name remain in the data without one.
   than included as corrupted text. As a result, some features have no display
   name.
 - This is a static snapshot; it does not update automatically. The application
-  currently introduces these categories; displaying the GeoJSON places on the
-  map is a subsequent checkpoint.
+  loads the snapshot bundled with the app.
