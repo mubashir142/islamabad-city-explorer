@@ -160,9 +160,12 @@ function App() {
     const controller = new AbortController()
     async function loadPlaces() {
       try {
-        const response = await fetch('/data/islamabad-services.geojson', {
-          signal: controller.signal,
-        })
+        const response = await fetch(
+          `${import.meta.env.BASE_URL}data/islamabad-services.geojson`,
+          {
+            signal: controller.signal,
+          },
+        )
         if (!response.ok) {
           throw new Error(`Dataset request failed (${response.status})`)
         }
