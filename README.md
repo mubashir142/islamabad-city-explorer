@@ -22,6 +22,13 @@ npx tsc --noEmit
 npm run build
 ```
 
+## Publish the site
+
+The site deploys to GitHub Pages whenever changes are pushed to `main`:
+<https://mubashir142.github.io/islamabad-city-explorer/>. In the repository's
+**Settings → Pages**, set the build and deployment source to **GitHub Actions**.
+The first deployment will publish the production build at that address.
+
 ## Explore the map
 
 - Search places by name or street, then select a result to focus the map and
